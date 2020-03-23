@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.css">
+
+    <title>Mais-Vendas - Cadastro Produto</title>
+    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+    <link rel="icon" href="img/LUNNE-LOGO.ico" type="ico" sizes="16x16">
+</head>
+
+<body>
+    <header class="menu-bg">
+        <div class="menu">
+            <div class="menu-logo">
+                <a href="../Index.html"><img src="img/LUNNE-LOGO.png" alt="Lunne"></a>
+            </div>
+            <nav class="menu-nav">
+                <ul>
+                    <li><a href="produtos.html">Produtos</a></li>
+                    <li><a href="../clientes/clientes.html">Clientes</a></li>
+                    <li><a href="../vendores/vendedores.html">Vendedores</a></li>
+                    <li><a href="../pagamento/pagamento.html">Forma de Pagamento</a></li>
+                    <li><a href="../cores/cores.html">Cores</a></li>
+                    <li><a href="#">Estoque</a></li>
+                    <li><a href="#">Pedido de Compra</a></li>
+                    <li><a href="#">Pedidos de Venda</a></li>
+                    <li><a href="#">Grupos</a></li>
+                    <li><a href="#">Subgrupos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="title-center">Cadastro de Produtos</h1>
+
+        <div class="toolbar">
+            <a id="btncreate" class="btn btn-secondary btn-lunne" href="javascript:">Novo Produto</a>
+        </div>
+
+        <table id="table" data-toggle="table" data-url="http://localhost:8080/produtos" data-locale="pt-BR" data-pagination="true" data-search="true" data-show-refresh="true" data-show-columns="true" data-sort-name="id" data-sort-order="desc" data-height="400"
+            data-toolbar=".toolbar">
+            <thead class="text-table-head">
+                <tr>
+                    <th data-field="idProduto">ID</th>
+                    <th data-field="codProduto">Codigo</th>
+                    <th data-field="ref">Referência</th>
+                    <th data-field="descricao">Descrição</th>
+                    <th data-field="cor">Cor</th>
+                    <th data-field="ncm">NCM</th>
+                    <th data-field="preco">Preço</th>
+                    <th data-field="action" data-align="center" data-formatter="actionFormatter" data-events="actionEvents">Action</th>
+                </tr>
+            </thead>
+        </table>
+        <div class="alert" style="width: 100%; margin-top: 8px;"></div>
+    </div>
+
+    <div id="modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Codigo</label>
+                        <input type="text" class="form-control" name="codProduto" placeholder="99999">
+                    </div>
+                    <div class="form-group">
+                        <label>EAN 13</label>
+                        <input type="text" class="form-control" name="codEan" placeholder="Codigo de Barra">
+                    </div>
+                    <div class="form-group">
+                        <label>Referência</label>
+                        <input type="text" class="form-control" name="ref" placeholder="Referência">
+                    </div>
+                    <div class="form-group">
+                        <label>Descrição</label>
+                        <input type="text" class="form-control" name="descricao" placeholder="Descrição">
+                    </div>
+                    <div class="form-group">
+                        <label>Descrição Reduzida</label>
+                        <input type="text" class="form-control" name="descricaoReduzida" placeholder="Descrição Reduzida">
+                    </div>
+                    <div class="form-group">
+                        <label>Cor</label>
+                        <input type="text" class="form-control" name="cor" placeholder="Cor">
+                    </div>
+                    <div class="form-group">
+                        <label>Unidade Desc.</label>
+                        <input type="text" class="form-control" name="gradeVenda">
+                    </div>
+                    <div class="form-group">
+                        <label>Descriçao Unidade</label>
+                        <input type="text" class="form-control" name="descricaoUnidadeVend">
+                    </div>
+                    <div class="form-group">
+                        <label>Unidade</label>
+                        <input type="text" class="form-control" name="unidadeVenda">
+                    </div>
+                    <div class="form-group">
+                        <label>Origem do Produto</label>
+                        <input type="number" class="form-control" name="origem" placeholder="0: Nacional 
+                        1: Importação Direta, 2: Importação Indireta">
+                    </div>
+                    <div class="form-group">
+                        <label>NCM</label>
+                        <input type="text" class="form-control" name="ncm" placeholder="NCM">
+                    </div>
+                    <div class="form-group">
+                        <label>Custo</label>
+                        <input type="text" class="form-control" name="custo" placeholder="Custo">
+                    </div>
+                    <div class="form-group">
+                        <label>Preço</label>
+                        <input type="text" class="form-control" name="preco" placeholder="Preço">
+                    </div>
+                    <div class="form-group">
+                        <label>Altura</label>
+                        <input type="text" class="form-control" name="altura" placeholder="Altura">
+                    </div>
+                    <div class="form-group">
+                        <label>Largura</label>
+                        <input type="text" class="form-control" name="largura" placeholder="Largura">
+                    </div>
+                    <div class="form-group">
+                        <label>Comprimento</label>
+                        <input type="text" class="form-control" name="comprimento" placeholder="Comprimento">
+                    </div>
+                    <div class="form-group">
+                        <label>Peso</label>
+                        <input type="text" class="form-control" name="peso" placeholder="Peso">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" id="btnConfirmarNovaPessoa">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+</body>
+
+<script>
+    var API_URL = 'http://localhost:8080/produtos/'
+    var table = $('#table');
+    var modal = $('#modal').modal({
+        show: false
+    });
+    var alert = $('.alert').hide(); // hide alerta fechado
+
+    //ao abrir modal recebe o titulo(obrigatorio), e a linha (opcional)
+    function showModal(title, row_) {
+        var row = row_ || {
+            idProduto: '',
+            codProduto: '',
+            codEan: '',
+            ref: '',
+            descricao: '',
+            descricaoReduzida: '',
+            cor: '',
+            gradeVenda: '',
+            origem: '',
+            ncm: '',
+            custo: '',
+            preco: '',
+            altura: '',
+            largura: '',
+            comprimento: '',
+            peso: '',
+        };
+        console.log(title);
+        modal.data('idProduto', row.idProduto);
+        modal.find('.modal-title').text(title);
+        for (var name in row) {
+            if (row[name]) {
+                modal.find('input[name="' + name + '"]').val(row[name]);
+            } else {
+                modal.find('input[name="' + name + '"]').val('');
+            }
+        }
+        modal.modal('show');
+    }
+
+    function showAlert(title, type) {
+        alert.attr('class', 'alert alert-' + type || 'success').html('<i class="fas fa-check"></i> ' + title).show();
+        setTimeout(function() {
+            alert.hide()
+        }, 3000);
+    }
+
+    function actionFormatter(value) {
+        return [
+            '<a class="update" href="javascript:" title="Atualizar Item"><i class="fa fa-edit"></i></a>',
+            '<a class="remove" href="javascript:" title="Remover Item"><i class="fa fa-trash"></i></a>'
+        ].join('')
+    }
+    // Editar e Deletar Pessoas
+    window.actionEvents = {
+            'click .update': function(e, value, row) {
+                showModal("Atualizar Produto", row);
+            },
+            'click .remove': function(e, value, row) {
+                if (confirm('Você deseja realmente deletar esse item?')) {
+                    $.ajax({
+                        url: API_URL + row.idProduto,
+                        type: 'delete',
+                        success: function() {
+                            table.bootstrapTable('refresh');
+                            showAlert('Item removido com sucesso!', 'success');
+                        },
+                        error: function() {
+                            showAlert('Não foi possivel remover esse item!', 'danger');
+                        }
+                    })
+                }
+            }
+        }
+        //Atulizar pagina auto
+    $(function() {
+            setInterval(() => {
+                console.log('teste')
+                table.bootstrapTable('refresh');
+            }, 60000)
+        })
+        //Ai clicar botão nova pessoal, abrir o modal
+    $(function() {
+        $('#btncreate').click(function() {
+            showModal($(this).text());
+        });
+    });
+    $(function() {
+        modal.find('#btnConfirmarNovaPessoa').click(function() {
+            var row = {}
+            modal.find('input[name]').each(function() {
+                row[$(this).attr('name')] = $(this).val()
+            });
+            console.log(JSON.stringify(row));
+            $.ajax({
+                url: API_URL + (modal.data('idProduto') || ''),
+                type: modal.data('idProduto') ? 'put' : 'post',
+                contentType: 'application/json',
+                data: JSON.stringify(row),
+                success: function() {
+                    modal.modal('hide');
+                    table.bootstrapTable('refresh');
+                    showAlert((modal.data('idProduto') ? 'Item atualizado com sucesso!' : 'Item criado com sucesso!'), 'success')
+                },
+                error: function() {
+                    modal.modal('hide')
+                    showAlert((modal.data('idProduto') ? 'Falha ao atualizar o item!' : 'Falha ao criar o item'), 'danger')
+                }
+            })
+        })
+    })
+
+    // Traduzindo tabela
+    $.fn.bootstrapTable.locales['pt-BR'] = {
+        formatLoadingMessage() {
+            return 'Carregando, aguarde'
+        },
+        formatRecordsPerPage(pageNumber) {
+            return `${pageNumber} registros por página`
+        },
+        formatShowingRows(pageFrom, pageTo, totalRows, totalNotFiltered) {
+            if (totalNotFiltered !== undefined && totalNotFiltered > 0 && totalNotFiltered > totalRows) {
+                return `Exibindo ${pageFrom} até ${pageTo} de ${totalRows} linhas (filtered from ${totalNotFiltered} total rows)`
+            }
+            return `Exibindo ${pageFrom} até ${pageTo} de ${totalRows} linhas`
+        },
+        formatSRPaginationPreText() {
+            return 'página anterior'
+        },
+        formatSRPaginationPageText(page) {
+            return `Para a página ${page}`
+        },
+        formatSRPaginationNextText() {
+            return 'próxima página'
+        },
+        formatDetailPagination(totalRows) {
+            return `Mostrando ${totalRows} linhas`
+        },
+        formatClearSearch() {
+            return 'Limpar Pasquisa'
+        },
+        formatSearch() {
+            return 'Pesquisar'
+        },
+        formatNoMatches() {
+            return 'Nenhum registro encontrado'
+        },
+        formatPaginationSwitch() {
+            return 'Ocultar/Exibir paginação'
+        },
+        formatPaginationSwitchDown() {
+            return 'Mostrar Paginação'
+        },
+        formatPaginationSwitchUp() {
+            return 'Esconder Paginação'
+        },
+        formatRefresh() {
+            return 'Recarregar'
+        },
+        formatToggle() {
+            return 'Alternar'
+        },
+        formatToggleOn() {
+            return 'Show card view'
+        },
+        formatToggleOff() {
+            return 'Hide card view'
+        },
+        formatColumns() {
+            return 'Colunas'
+        },
+        formatColumnsToggleAll() {
+            return 'Toggle all'
+        },
+        formatFullscreen() {
+            return 'Tela cheia'
+        },
+        formatAllRows() {
+            return 'Tudo'
+        },
+        formatAutoRefresh() {
+            return 'Atualização Automática'
+        },
+        formatExport() {
+            return 'Exportar dados'
+        },
+        formatJumpTo() {
+            return 'IR'
+        },
+        formatAdvancedSearch() {
+            return 'Pesquisa Avançada'
+        },
+        formatAdvancedCloseButton() {
+            return 'Fechar'
+        }
+    }
+</script>
+
+</html>
