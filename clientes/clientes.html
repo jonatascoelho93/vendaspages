@@ -198,7 +198,6 @@
         }
 
         $.getJSON("http://viacep.com.br/ws/" + cep.replace("-", "") + "/json/", function (dados) {
-            debugger
             if (!("erro" in dados)) {
                 //Atualiza os campos com os valores da consulta.
                 $("#logradouroModal").val(dados.logradouro);
@@ -264,6 +263,12 @@
                 modal.find('input[name="' + name + '"]').val(row[name]);
             } else {
                 modal.find('input[name="' + name + '"]').val('');
+            }
+            if(name == 'enderecoEntity'){
+                var x = row[name]
+                for(var i in x){
+                    modal.find('input[name="' + i + '"]').val(x[i]);
+                }
             }
         }
         modal.modal('show');
